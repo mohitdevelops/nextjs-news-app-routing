@@ -1,10 +1,11 @@
-import { DUMMY_NEWS } from "@/utils/news-data";
 import { notFound } from "next/navigation";
 import NewsImageDialog from "./dialog";
+import { getNewsItem } from "@/utils/news";
 
-export default function NewsImage({ params }) {
+export default async function NewsImage({ params }) {
 	const newsSlug = params.newsSlug;
-	const newsItem = DUMMY_NEWS.find((newsItem) => newsItem.slug === newsSlug);
+	const newsItem = await getNewsItem(newsSlug);
+
 	if (!newsItem) {
 		return notFound();
 	}
